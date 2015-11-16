@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "node server",
     "build": "webpack"
   },
   "dependencies": {
@@ -8,9 +8,9 @@
     "babel-loader": "^6.1.0",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
-    "hjs-webpack": "^5.0.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-hot-loader": "^1.3.0",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.12.1"
   },
