@@ -7,12 +7,6 @@ import todoApp from './reducers'
 
 let store = createStore(todoApp)
 
-// just for testing
-console.log(store.getState())
-store.subscribe(() =>
-  console.log(store.getState())
-)
-
 const rootElement = document.getElementById('root')
 
 render(
