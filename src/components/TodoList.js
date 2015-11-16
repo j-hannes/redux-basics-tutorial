@@ -9,6 +9,7 @@ export default class TodoList extends Component {
           <Todo
             {...todo}
             key={index}
+            onClick={() => this.props.onTodoClick(index)}
           />
         )}
       </ul>
@@ -17,6 +18,7 @@ export default class TodoList extends Component {
 }
 
 TodoList.propTypes = {
+  onTodoClick: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,

@@ -1,4 +1,4 @@
-import {ADD_TODO} from './actions'
+import {ADD_TODO, COMPLETE_TODO} from './actions'
 
 function todos(state = [], action) {
   switch (action.type) {
@@ -10,6 +10,15 @@ function todos(state = [], action) {
           completed: false
         }
       ]
+    case COMPLETE_TODO:
+      return [
+        ...state.slice(0, action.index),
+        Object.assign({}, state[action.index], {
+          completed: true
+        }),
+        ...state.slice(action.index + 1)
+      ]
+
     default:
       return state
   }

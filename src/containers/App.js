@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addTodo} from '../actions'
+import {addTodo, completeTodo} from '../actions'
 import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 
@@ -15,6 +15,7 @@ class App extends Component {
         />
         <TodoList
           todos={todos}
+          onTodoClick={index => dispatch(completeTodo(index))}
         />
       </div>
     )
