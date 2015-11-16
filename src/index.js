@@ -1,1 +1,9 @@
-console.log('hello');
+import React from 'react'
+import {render} from 'react-dom'
+
+const rootElement = document.getElementById('root')
+
+render(
+  <div>hello</div>,
+  rootElement
+)
