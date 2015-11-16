@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "hjs-webpack": "^5.0.0",
+    "webpack": "^1.12.6",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "version": "0.1.0",
+  "name": "redux-basics-tutorial"
+}
