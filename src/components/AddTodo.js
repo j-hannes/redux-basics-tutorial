@@ -1,11 +1,23 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 
-class AddTodo extends Component {
+export default class AddTodo extends Component {
   render() {
     return (
-      <div>add todo component</div>
+      <div>
+        <input type="text" ref="input" />
+        <button onClick={(e) => this.handleClick(e)}>Add</button>
+      </div>
     )
+  }
+
+  handleClick(e) {
+    const node = this.refs.input
+    const text = node.value
+    this.props.onAddClick(text)
+    node.value = ''
   }
 }
 
-export default AddTodo
+AddTodo.propTypes = {
+  onAddClick: PropTypes.func.isRequired
+}

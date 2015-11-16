@@ -6,9 +6,8 @@ class App extends Component {
     return (
       <div>
         <AddTodo
-          onAddClick={text =>
-            console.log('adding todo', text)
-          } />
+          onAddClick={text => console.log('adding todo', text)}
+        />
       </div>
     )
   }
