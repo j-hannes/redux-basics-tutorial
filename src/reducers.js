@@ -10,20 +10,12 @@ import {
 
 const {SHOW_ALL} = VisibilityFilters
 
-function newTodo(text) {
-  return {text, completed: false}
-}
-
-function markCompleted(todo) {
-  return merge(todo, {completed: true})
-}
-
 function todos(state = [], action) {
   return match(action.type, {
     ADD_TODO:
-      append(newTodo(action.text)),
+      append({text: action.text, completed: false}),
     COMPLETE_TODO:
-      update(action.index, markCompleted(state[action.index])),
+      update(action.index, merge(state[action.index], {completed: true})),
     otherwise:
       identity,
   })(state)
