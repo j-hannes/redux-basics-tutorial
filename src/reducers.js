@@ -20,16 +20,21 @@ function markCompleted(todo) {
 
 function todos(state = [], action) {
   return match(action.type, {
-    ADD_TODO:      append(newTodo(action.text)),
-    COMPLETE_TODO: update(action.index, markCompleted(state[action.index])),
-    otherwise:     identity,
+    ADD_TODO:
+      append(newTodo(action.text)),
+    COMPLETE_TODO:
+      update(action.index, markCompleted(state[action.index])),
+    otherwise:
+      identity,
   })(state)
 }
 
 function visibilityFilter(state = SHOW_ALL, action) {
   return match(action.type, {
-    SET_VISIBILITY_FILTER: () => action.filter,
-    otherwise:             () => state,
+    SET_VISIBILITY_FILTER:
+      () => action.filter,
+    otherwise:
+      () => state,
   })
 }
 
