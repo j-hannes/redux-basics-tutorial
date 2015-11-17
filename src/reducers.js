@@ -1,4 +1,10 @@
-import {ADD_TODO, COMPLETE_TODO, VisibilityFilters} from './actions'
+import {
+  ADD_TODO,
+  COMPLETE_TODO,
+  SET_VISIBILITY_FILTER,
+  VisibilityFilters,
+} from './actions'
+
 const {SHOW_ALL} = VisibilityFilters
 
 function todos(state = [], action) {
@@ -27,6 +33,8 @@ function todos(state = [], action) {
 
 function visibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
     default:
       return state
   }

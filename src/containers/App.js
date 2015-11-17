@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addTodo, completeTodo} from '../actions'
+import {addTodo, completeTodo, setVisibilityFilter} from '../actions'
 import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 import Footer from '../components/Footer'
@@ -22,6 +22,8 @@ class App extends Component {
         />
         <Footer
           filter={visibilityFilter}
+          onFilterChange={nextFilter =>
+            dispatch(setVisibilityFilter(nextFilter))}
         />
       </div>
     )
@@ -29,7 +31,10 @@ class App extends Component {
 }
 
 function select(state) {
-  return state
+  return {
+    todos: state.todos,
+    visibilityFilter: state.visibilityFilter,
+  }
 }
 
 export default connect(select)(App)
