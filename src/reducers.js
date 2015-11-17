@@ -1,4 +1,5 @@
-import {ADD_TODO, COMPLETE_TODO} from './actions'
+import {ADD_TODO, COMPLETE_TODO, VisibilityFilters} from './actions'
+const {SHOW_ALL} = VisibilityFilters
 
 function todos(state = [], action) {
   switch (action.type) {
@@ -24,8 +25,16 @@ function todos(state = [], action) {
   }
 }
 
+function visibilityFilter(state = SHOW_ALL, action) {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
 export default function todoApp(state = {}, action) {
   return {
-    todos: todos(state.todos, action)
+    todos: todos(state.todos, action),
+    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
   }
 }
