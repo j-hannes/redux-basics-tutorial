@@ -1,6 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addTodo, completeTodo, setVisibilityFilter} from '../actions'
+import {
+  addTodo,
+  completeTodo,
+  setVisibilityFilter,
+  VisibilityFilters
+} from '../actions'
 import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 import Footer from '../components/Footer'
@@ -8,7 +13,7 @@ import Footer from '../components/Footer'
 class App extends Component {
   render() {
     // injected by connect() call
-    const {dispatch, todos, visibilityFilter} = this.props
+    const {dispatch, visibleTodos, visibilityFilter} = this.props
     return (
       <div>
         <AddTodo
@@ -16,7 +21,7 @@ class App extends Component {
             dispatch(addTodo(text))}
         />
         <TodoList
-          todos={todos}
+          todos={visibleTodos}
           onTodoClick={index =>
             dispatch(completeTodo(index))}
         />
@@ -32,8 +37,19 @@ class App extends Component {
 
 function select(state) {
   return {
-    todos: state.todos,
+    visibleTodos: filterTodos(state.todos, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter,
+  }
+}
+
+function filterTodos(todos, filter) {
+  switch (filter) {
+    case VisibilityFilters.SHOW_ALL:
+      return todos
+    case VisibilityFilters.SHOW_COMPLETED:
+      return todos.filter(todo => todo.completed)
+    case VisibilityFilters.SHOW_ACTIVE:
+      return todos.filter(todo => !todo.completed)
   }
 }
 
