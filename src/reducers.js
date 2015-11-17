@@ -1,4 +1,6 @@
 import {combineReducers} from 'redux'
+import {append, update, merge, identity} from 'ramda'
+import match from './tools/match'
 import {
   ADD_TODO,
   COMPLETE_TODO,
@@ -8,38 +10,29 @@ import {
 
 const {SHOW_ALL} = VisibilityFilters
 
+function newTodo(text) {
+  return {text, completed: false}
+}
+
+function markCompleted(todo) {
+  return merge(todo, {completed: true})
+}
+
 function todos(state = [], action) {
-  const select = {
-    ADD_TODO:      () => [
-        ...state,
-        {
-          text: action.text,
-          completed: false
-        }
-      ],
-    COMPLETE_TODO: () => [
-        ...state.slice(0, action.index),
-        Object.assign({}, state[action.index], {
-          completed: true
-        }),
-        ...state.slice(action.index + 1)
-      ],
-    default:       () => state
-  }
-  return (select[action.type] || select.default)();
+  return match(action.type, {
+    ADD_TODO:      append(newTodo(action.text)),
+    COMPLETE_TODO: update(action.index, markCompleted(state[action.index])),
+    otherwise:     identity,
+  })(state)
 }
 
 function visibilityFilter(state = SHOW_ALL, action) {
-  const select = {
+  return match(action.type, {
     SET_VISIBILITY_FILTER: () => action.filter,
-    default:               () => state,
-  }
-  return (select[action.type] || select.default)();
+    otherwise:             () => state,
+  })
 }
 
-const todoApp = combineReducers({
-  todos,
-  visibilityFilter,
-})
+const todoApp = combineReducers({todos, visibilityFilter})
 
 export default todoApp
