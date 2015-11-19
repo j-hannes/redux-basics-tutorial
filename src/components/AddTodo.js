@@ -10,7 +10,7 @@ export default class AddTodo extends Component {
     )
   }
 
-  handleClick(e) {
+  handleClick() {
     const node = this.refs.input
     const text = node.value.trim()
     if (text) {

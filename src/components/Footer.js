@@ -40,6 +40,6 @@ Footer.propTypes = {
   filter: PropTypes.oneOf([
     'SHOW_ALL',
     'SHOW_COMPLETED',
-    'SHOW_ACTIVE',
+    'SHOW_ACTIVE'
   ]).isRequired
 }

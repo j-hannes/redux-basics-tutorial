@@ -1,33 +1,33 @@
 import {combineReducers} from 'redux'
-import {append, update, merge, identity} from 'ramda'
-import match from './tools/match'
+import {append, update, merge} from 'ramda'
 import {
   ADD_TODO,
   COMPLETE_TODO,
   SET_VISIBILITY_FILTER,
-  VisibilityFilters,
+  VisibilityFilters
 } from './actions'
 
 const {SHOW_ALL} = VisibilityFilters
 
 function todos(state = [], action) {
-  return match(action.type, {
-    ADD_TODO:
-      append({text: action.text, completed: false}),
-    COMPLETE_TODO:
-      update(action.index, merge(state[action.index], {completed: true})),
-    otherwise:
-      identity,
-  })(state)
+  switch (action.type) {
+  case ADD_TODO:
+    return append({text: action.text, completed: false}, state)
+  case COMPLETE_TODO:
+    const completedTodo = merge(state[action.index], {completed: true})
+    return update(action.index, completedTodo, state)
+  default:
+    return state
+  }
 }
 
 function visibilityFilter(state = SHOW_ALL, action) {
-  return match(action.type, {
-    SET_VISIBILITY_FILTER:
-      () => action.filter,
-    otherwise:
-      () => state,
-  })
+  switch (action.type) {
+  case SET_VISIBILITY_FILTER:
+    return action.filter
+  default:
+    return state
+  }
 }
 
 const todoApp = combineReducers({todos, visibilityFilter})
