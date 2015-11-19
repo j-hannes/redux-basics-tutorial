@@ -5,7 +5,11 @@ import {Provider} from 'react-redux'
 import App from './containers/App'
 import todoApp from './reducers'
 
-let store = createStore(todoApp)
+const finalCreateStore = window.devToolsExtension
+  ? window.devToolsExtension()(createStore)
+  : createStore
+
+let store = finalCreateStore(todoApp)
 
 const rootElement = document.getElementById('root')
 
